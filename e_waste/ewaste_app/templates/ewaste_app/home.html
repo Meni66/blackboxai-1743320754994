@@ -1,0 +1,51 @@
+{% extends "ewaste_app/base.html" %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded-lg">
+    <h1 class="display-4">Welcome to E-Waste Manager</h1>
+    <p class="lead">Responsible electronic waste disposal made simple</p>
+    <hr class="my-4">
+    <p>Find collection points near you and schedule pickups for your e-waste.</p>
+    <div class="mt-4">
+        {% if user.is_authenticated %}
+            <a class="btn btn-success btn-lg" href="{% url 'collection_points' %}" role="button">
+                View Collection Points
+            </a>
+        {% else %}
+            <a class="btn btn-success btn-lg mr-3" href="{% url 'login' %}" role="button">
+                Login
+            </a>
+            <a class="btn btn-outline-success btn-lg" href="{% url 'register' %}" role="button">
+                Register
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-recycle text-success"></i> Responsible Recycling</h5>
+                <p class="card-text">Ensure your e-waste is properly recycled through certified collection points.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar-check text-success"></i> Easy Scheduling</h5>
+                <p class="card-text">Schedule pickups at your convenience with our simple online system.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line text-success"></i> Track Impact</h5>
+                <p class="card-text">Monitor your environmental contribution through your recycling history.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
