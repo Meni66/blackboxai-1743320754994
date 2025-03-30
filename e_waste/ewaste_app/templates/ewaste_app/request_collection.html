@@ -1,0 +1,43 @@
+{% extends "ewaste_app/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2 class="mb-4">Request E-Waste Collection</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="collection_point" class="form-label">Collection Point</label>
+                <select class="form-select" id="collection_point" name="collection_point" required>
+                    <option value="">Select a collection point</option>
+                    {% for point in points %}
+                    <option value="{{ point.id }}" {% if selected_point == point.id %}selected{% endif %}>
+                        {{ point.name }} - {{ point.address }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="collection_date" class="form-label">Preferred Collection Date</label>
+                <input type="date" class="form-control" id="collection_date" name="collection_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="weight_kg" class="form-label">Estimated Weight (kg)</label>
+                <input type="number" step="0.01" min="0.01" class="form-control" id="weight_kg" name="weight_kg" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="notes" class="form-label">Additional Notes</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit Request</button>
+            <a href="{% url 'collection_points' %}" class="btn btn-outline-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
