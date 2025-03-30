@@ -1,0 +1,42 @@
+{% extends "ewaste_app/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2 class="mb-4">Collection Points</h2>
+        
+        <div class="list-group">
+            {% for point in points %}
+            <div class="list-group-item mb-3">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ point.name }}</h5>
+                    <small>
+                        {% if point.accepts_electronics %}
+                        <span class="badge bg-success me-1">Electronics</span>
+                        {% endif %}
+                        {% if point.accepts_batteries %}
+                        <span class="badge bg-info me-1">Batteries</span>
+                        {% endif %}
+                        {% if point.accepts_lamps %}
+                        <span class="badge bg-warning">Lamps</span>
+                        {% endif %}
+                    </small>
+                </div>
+                <p class="mb-1">{{ point.address }}</p>
+                <small class="text-muted">
+                    <i class="fas fa-phone"></i> {{ point.contact_number }} | 
+                    <i class="fas fa-envelope"></i> {{ point.email }} | 
+                    <i class="fas fa-clock"></i> {{ point.operating_hours }}
+                </small>
+                <div class="mt-2">
+                    <a href="{% url 'request_collection' %}?point={{ point.id }}" 
+                       class="btn btn-sm btn-success">
+                        Request Collection
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
